@@ -772,3 +772,143 @@ WHERE c.contype = 'f'
   AND t3.nspname = ANY (current_schemas(false))
 ORDER BY c.conname
 [0m
+  [1m[36mUser Load (1.2ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35mPost Load (1.4ms)[0m  SELECT "posts".* FROM "posts"
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36mPost Load (0.7ms)[0m  [1mSELECT "posts".* FROM "posts"[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (5.8ms)[0m  INSERT INTO "posts" ("user_id", "created_at", "updated_at", "like_count") VALUES ($1, $2, $3, $4) RETURNING "id"  [["user_id", 1], ["created_at", "2015-10-17 22:47:36.484100"], ["updated_at", "2015-10-17 22:47:36.484100"], ["like_count", 0]]
+  [1m[36m (1.6ms)[0m  [1mCOMMIT[0m
+  [1m[35mPost Load (0.8ms)[0m  SELECT "posts".* FROM "posts"
+  [1m[36mPost Load (0.7ms)[0m  [1mSELECT "posts".* FROM "posts"[0m
+  [1m[35mUser Load (1.8ms)[0m  SELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36mPost Load (0.3ms)[0m  [1mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mLike Exists (2.5ms)[0m  [1mSELECT  1 AS one FROM "likes" WHERE ("likes"."user_id" = 1 AND "likes"."post_id" = 1) LIMIT 1[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "likes" ("post_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["post_id", 1], ["user_id", 1], ["created_at", "2015-10-17 22:48:43.610267"], ["updated_at", "2015-10-17 22:48:43.610267"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35mLike Exists (0.7ms)[0m  SELECT  1 AS one FROM "likes" WHERE ("likes"."user_id" = 1 AND "likes"."id" != 1 AND "likes"."post_id" = 1) LIMIT 1
+  [1m[36mSQL (2.6ms)[0m  [1mUPDATE "users" SET "like_count" = COALESCE("like_count", 0) + 1 WHERE "users"."id" = 1[0m
+PG::UndefinedColumn: ERROR:  column "like_count" does not exist
+LINE 1: UPDATE "users" SET "like_count" = COALESCE("like_count", 0) ...
+                                                   ^
+: UPDATE "users" SET "like_count" = COALESCE("like_count", 0) + 1 WHERE "users"."id" = 1
+  [1m[36mPost Load (0.6ms)[0m  [1mSELECT "posts".* FROM "posts"[0m
+  [1m[35mUser Load (1.2ms)[0m  SELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36mPost Load (0.4ms)[0m  [1mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mLike Exists (1.0ms)[0m  [1mSELECT  1 AS one FROM "likes" WHERE ("likes"."user_id" = 1 AND "likes"."post_id" = 1) LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36mLike Exists (0.7ms)[0m  [1mSELECT  1 AS one FROM "likes" WHERE ("likes"."user_id" = 1 AND "likes"."post_id" = 1) LIMIT 1[0m
+  [1m[35mLike Exists (0.5ms)[0m  SELECT  1 AS one FROM "likes" WHERE ("likes"."user_id" = 1 AND "likes"."post_id" = 1) LIMIT 1
+  [1m[36mPost Load (1.0ms)[0m  [1mSELECT  "posts".* FROM "posts"  ORDER BY "posts"."id" ASC LIMIT 1[0m
+  [1m[35mUser Load (1.2ms)[0m  SELECT  "users".* FROM "users"  ORDER BY "users"."id" DESC LIMIT 1
+  [1m[36mUser Load (0.9ms)[0m  [1mSELECT  "users".* FROM "users"  ORDER BY "users"."id" DESC LIMIT 1[0m
+  [1m[35mPost Load (0.5ms)[0m  SELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mLike Exists (0.4ms)[0m  SELECT  1 AS one FROM "likes" WHERE ("likes"."user_id" = 2 AND "likes"."post_id" = 1) LIMIT 1
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "likes" ("post_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["post_id", 1], ["user_id", 2], ["created_at", "2015-10-17 22:51:04.747369"], ["updated_at", "2015-10-17 22:51:04.747369"]]
+  [1m[35m (8.4ms)[0m  COMMIT
+  [1m[36mLike Exists (0.7ms)[0m  [1mSELECT  1 AS one FROM "likes" WHERE ("likes"."user_id" = 2 AND "likes"."id" != 2 AND "likes"."post_id" = 1) LIMIT 1[0m
+  [1m[35mSQL (2.2ms)[0m  UPDATE "posts" SET "like_count" = COALESCE("like_count", 0) + 1 WHERE "posts"."id" = 1
+  [1m[36mLike Exists (0.7ms)[0m  [1mSELECT  1 AS one FROM "likes" WHERE ("likes"."user_id" = 2 AND "likes"."id" != 2 AND "likes"."post_id" = 1) LIMIT 1[0m
+  [1m[35mPost Load (0.7ms)[0m  SELECT "posts".* FROM "posts"
+  [1m[36mUser Load (0.9ms)[0m  [1mSELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mPost Load (0.5ms)[0m  SELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mLike Load (0.5ms)[0m  [1mSELECT "likes".* FROM "likes" WHERE "likes"."user_id" = $1 AND "likes"."post_id" = $2[0m  [["user_id", 1], ["post_id", 1]]
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mDELETE FROM "likes" WHERE "likes"."id" = $1[0m  [["id", 1]]
+  [1m[35m (8.3ms)[0m  COMMIT
+  [1m[36mSQL (0.9ms)[0m  [1mUPDATE "posts" SET "like_count" = COALESCE("like_count", 0) - 1 WHERE "posts"."id" = 1[0m
+  [1m[35mPost Load (0.7ms)[0m  SELECT "posts".* FROM "posts"
+  [1m[36mLike Load (0.4ms)[0m  [1mSELECT "likes".* FROM "likes"[0m
+  [1m[35mUser Load (1.0ms)[0m  SELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36mPost Load (0.5ms)[0m  [1mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mLike Exists (0.7ms)[0m  [1mSELECT  1 AS one FROM "likes" WHERE ("likes"."user_id" = 1 AND "likes"."post_id" = 1) LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "likes" ("post_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["post_id", 1], ["user_id", 1], ["created_at", "2015-10-17 22:51:33.617927"], ["updated_at", "2015-10-17 22:51:33.617927"]]
+  [1m[36m (7.7ms)[0m  [1mCOMMIT[0m
+  [1m[35mLike Exists (0.6ms)[0m  SELECT  1 AS one FROM "likes" WHERE ("likes"."user_id" = 1 AND "likes"."id" != 3 AND "likes"."post_id" = 1) LIMIT 1
+  [1m[36mSQL (0.8ms)[0m  [1mUPDATE "posts" SET "like_count" = COALESCE("like_count", 0) + 1 WHERE "posts"."id" = 1[0m
+  [1m[35mLike Exists (0.4ms)[0m  SELECT  1 AS one FROM "likes" WHERE ("likes"."user_id" = 1 AND "likes"."id" != 3 AND "likes"."post_id" = 1) LIMIT 1
+  [1m[36mPost Load (0.7ms)[0m  [1mSELECT "posts".* FROM "posts"[0m
+  [1m[35mPost Load (0.7ms)[0m  SELECT "posts".* FROM "posts"
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  DELETE FROM "posts" WHERE "posts"."id" = $1  [["id", 1]]
+  [1m[36m (8.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mPost Load (0.7ms)[0m  SELECT "posts".* FROM "posts"
+  [1m[36mLike Load (0.8ms)[0m  [1mSELECT "likes".* FROM "likes"[0m
+  [1m[35mLike Load (0.4ms)[0m  SELECT "likes".* FROM "likes"
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  DELETE FROM "likes" WHERE "likes"."id" = $1  [["id", 2]]
+  [1m[36m (3.9ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mDELETE FROM "likes" WHERE "likes"."id" = $1[0m  [["id", 3]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35mLike Load (0.7ms)[0m  SELECT "likes".* FROM "likes"
+  [1m[36mPost Load (0.9ms)[0m  [1mSELECT "posts".* FROM "posts"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "posts" ("user_id", "created_at", "updated_at", "like_count") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 1], ["created_at", "2015-10-17 22:52:25.218248"], ["updated_at", "2015-10-17 22:52:25.218248"], ["like_count", 0]]
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36mUser Load (1.2ms)[0m  [1mSELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mPost Load (0.3ms)[0m  SELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mUser Load (0.8ms)[0m  [1mSELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mPost Load (0.5ms)[0m  SELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1  [["id", 2]]
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mLike Exists (0.5ms)[0m  SELECT  1 AS one FROM "likes" WHERE ("likes"."user_id" = 1 AND "likes"."post_id" = 2) LIMIT 1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "likes" ("post_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["post_id", 2], ["user_id", 1], ["created_at", "2015-10-17 22:52:33.473731"], ["updated_at", "2015-10-17 22:52:33.473731"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36mLike Exists (0.7ms)[0m  [1mSELECT  1 AS one FROM "likes" WHERE ("likes"."user_id" = 1 AND "likes"."id" != 4 AND "likes"."post_id" = 2) LIMIT 1[0m
+  [1m[35mSQL (0.8ms)[0m  UPDATE "posts" SET "like_count" = COALESCE("like_count", 0) + 1 WHERE "posts"."id" = 2
+  [1m[36mLike Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "likes" WHERE ("likes"."user_id" = 1 AND "likes"."id" != 4 AND "likes"."post_id" = 2) LIMIT 1[0m
+  [1m[35mUser Load (0.9ms)[0m  SELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36mPost Load (0.5ms)[0m  [1mSELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1[0m  [["id", 2]]
+  [1m[35mLike Load (0.6ms)[0m  SELECT "likes".* FROM "likes" WHERE "likes"."user_id" = $1 AND "likes"."post_id" = $2  [["user_id", 1], ["post_id", 2]]
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  DELETE FROM "likes" WHERE "likes"."id" = $1  [["id", 4]]
+  [1m[36m (8.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mSQL (0.7ms)[0m  UPDATE "posts" SET "like_count" = COALESCE("like_count", 0) - 1 WHERE "posts"."id" = 2
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mPost Load (0.7ms)[0m  SELECT  "posts".* FROM "posts"  ORDER BY "posts"."id" ASC LIMIT 1
+  [1m[36mUser Load (0.9ms)[0m  [1mSELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mPost Load (0.5ms)[0m  SELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1  [["id", 2]]
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mLike Exists (0.5ms)[0m  SELECT  1 AS one FROM "likes" WHERE ("likes"."user_id" = 1 AND "likes"."post_id" = 2) LIMIT 1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "likes" ("post_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["post_id", 2], ["user_id", 1], ["created_at", "2015-10-17 22:52:47.379818"], ["updated_at", "2015-10-17 22:52:47.379818"]]
+  [1m[35m (8.3ms)[0m  COMMIT
+  [1m[36mLike Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "likes" WHERE ("likes"."user_id" = 1 AND "likes"."id" != 5 AND "likes"."post_id" = 2) LIMIT 1[0m
+  [1m[35mSQL (0.5ms)[0m  UPDATE "posts" SET "like_count" = COALESCE("like_count", 0) + 1 WHERE "posts"."id" = 2
+  [1m[36mLike Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "likes" WHERE ("likes"."user_id" = 1 AND "likes"."id" != 5 AND "likes"."post_id" = 2) LIMIT 1[0m
+  [1m[35mPost Load (0.8ms)[0m  SELECT  "posts".* FROM "posts"  ORDER BY "posts"."id" ASC LIMIT 1
+  [1m[36mUser Load (1.0ms)[0m  [1mSELECT  "users".* FROM "users"  ORDER BY "users"."id" DESC LIMIT 1[0m
+  [1m[35mPost Load (0.5ms)[0m  SELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1  [["id", 2]]
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mLike Exists (0.5ms)[0m  SELECT  1 AS one FROM "likes" WHERE ("likes"."user_id" = 2 AND "likes"."post_id" = 2) LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "likes" ("post_id", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["post_id", 2], ["user_id", 2], ["created_at", "2015-10-17 22:52:53.456187"], ["updated_at", "2015-10-17 22:52:53.456187"]]
+  [1m[35m (8.3ms)[0m  COMMIT
+  [1m[36mLike Exists (0.7ms)[0m  [1mSELECT  1 AS one FROM "likes" WHERE ("likes"."user_id" = 2 AND "likes"."id" != 6 AND "likes"."post_id" = 2) LIMIT 1[0m
+  [1m[35mSQL (0.7ms)[0m  UPDATE "posts" SET "like_count" = COALESCE("like_count", 0) + 1 WHERE "posts"."id" = 2
+  [1m[36mLike Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "likes" WHERE ("likes"."user_id" = 2 AND "likes"."id" != 6 AND "likes"."post_id" = 2) LIMIT 1[0m
+  [1m[35mPost Load (0.9ms)[0m  SELECT  "posts".* FROM "posts"  ORDER BY "posts"."id" ASC LIMIT 1
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT  "users".* FROM "users"  ORDER BY "users"."id" DESC LIMIT 1[0m
+  [1m[35mPost Load (0.4ms)[0m  SELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1  [["id", 2]]
+  [1m[36mLike Load (0.4ms)[0m  [1mSELECT "likes".* FROM "likes" WHERE "likes"."user_id" = $1 AND "likes"."post_id" = $2[0m  [["user_id", 2], ["post_id", 2]]
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mDELETE FROM "likes" WHERE "likes"."id" = $1[0m  [["id", 6]]
+  [1m[35m (8.3ms)[0m  COMMIT
+  [1m[36mSQL (0.6ms)[0m  [1mUPDATE "posts" SET "like_count" = COALESCE("like_count", 0) - 1 WHERE "posts"."id" = 2[0m
+  [1m[35mPost Load (0.9ms)[0m  SELECT  "posts".* FROM "posts"  ORDER BY "posts"."id" ASC LIMIT 1
+  [1m[36mUser Load (1.1ms)[0m  [1mSELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mPost Load (0.3ms)[0m  SELECT  "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1  [["id", 2]]
+  [1m[36mLike Load (0.6ms)[0m  [1mSELECT "likes".* FROM "likes" WHERE "likes"."user_id" = $1 AND "likes"."post_id" = $2[0m  [["user_id", 1], ["post_id", 2]]
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mDELETE FROM "likes" WHERE "likes"."id" = $1[0m  [["id", 5]]
+  [1m[35m (2.4ms)[0m  COMMIT
+  [1m[36mSQL (0.8ms)[0m  [1mUPDATE "posts" SET "like_count" = COALESCE("like_count", 0) - 1 WHERE "posts"."id" = 2[0m
+  [1m[35mPost Load (0.6ms)[0m  SELECT  "posts".* FROM "posts"  ORDER BY "posts"."id" ASC LIMIT 1

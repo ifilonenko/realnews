@@ -14,7 +14,6 @@ class Post < ActiveRecord::Base
   has_many :likes
   validates :user_id, presence: true
   before_create :default_values
-  validates :like_count, numericality: { greater_than_or_equal_to: 0 }
   def as_json(options = {})
       more_hash = {
         like_count: self.like_count,

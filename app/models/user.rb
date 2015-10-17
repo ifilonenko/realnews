@@ -71,7 +71,6 @@ class User < ActiveRecord::Base
     post = Post.find(post_id)
     like = Like.create(post_id: post_id, user_id: self.id) 
     if like.valid? || post.blank?
-      User.increment_counter(:like_count,self)
       Post.increment_counter(:like_count,post)
     end
     like.valid? || post.blank? ? true : false
@@ -82,7 +81,6 @@ class User < ActiveRecord::Base
     post = Post.find(post_id)
     unlike = Like.destroy_all(user_id: self.id, post_id: post_id)
     if !unlike.blank? || post.blank?
-      User.decrement_counter(:like_count, self) unless self.like_count == 0
       Post.decrement_counter(:like_count, post) unless post.like_count == 0
     end
     unlike.blank? || post.blank? ? false : true
