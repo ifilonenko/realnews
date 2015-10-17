@@ -1,0 +1,2 @@
+module EndorsesHelper
+end
