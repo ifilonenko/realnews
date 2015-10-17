@@ -90,4 +90,22 @@ class User < ActiveRecord::Base
   def liked?(post_id)
     Like.where(post_id: post_id, user_id: self.id).exists?
   end
+
+  # as_json
+  def as_json(options = {})
+      if options[:limited] 
+        exclude = [:endorsers, :email, :num_endorsements, :num_posts]
+        more_hash = {}
+      else
+        more_hash = {
+          id: self.id,
+          full_name: self.full_name,
+          email: self.email,
+          num_endorsements: self.num_endorsements,
+          num_posts: self.num_posts,
+        }
+        more_hash[:endorsers] = self.endorsers
+      end
+      super(except: exclude).merge(more_hash)
+  end
 end
