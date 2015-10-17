@@ -6,6 +6,7 @@
 #  fname            :string
 #  lname            :string
 #  full_name        :string
+#  bio              :string
 #  email            :string
 #  password_digest  :string
 #  num_endorsements :integer
@@ -22,6 +23,7 @@ class User < ActiveRecord::Base
   has_many :posts, dependent: :destroy
   validates :fname, presence: true, length: { maximum: 50 }
   validates :lname, length: { maximum: 50 } # For parsing reasons lname may not exist
+  validates :bio, length: { maximum: 150 }
   validates :email, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
   validates :password, length: { minimum: 6, too_short: "should have at least %{count} characters" }, on: :create
   before_save { |client| client.email = email.downcase }

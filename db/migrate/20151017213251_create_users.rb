@@ -4,6 +4,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :fname
       t.string :lname
       t.string :full_name
+      t.string :bio
       t.string :email
       t.string :password_digest
       t.integer :num_endorsements

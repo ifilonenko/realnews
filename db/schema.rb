@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151017223746) do
+ActiveRecord::Schema.define(version: 20151017232222) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,10 +31,19 @@ ActiveRecord::Schema.define(version: 20151017223746) do
   end
 
   create_table "posts", force: :cascade do |t|
+    t.text     "description"
+    t.boolean  "is_deleted"
+    t.string   "image_url"
+    t.string   "player_type"
+    t.string   "player_embed"
     t.integer  "like_count"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -50,6 +59,7 @@ ActiveRecord::Schema.define(version: 20151017223746) do
     t.string   "fname"
     t.string   "lname"
     t.string   "full_name"
+    t.string   "bio"
     t.string   "email"
     t.string   "password_digest"
     t.integer  "num_endorsements"

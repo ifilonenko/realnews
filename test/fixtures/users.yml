@@ -6,6 +6,7 @@
 #  fname            :string
 #  lname            :string
 #  full_name        :string
+#  bio              :string
 #  email            :string
 #  password_digest  :string
 #  num_endorsements :integer
