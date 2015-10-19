@@ -1,0 +1,48 @@
+<div class='modal fade' id='signup'>
+  <div class='modal-dialog modal-sm'>
+    <div class='modal-content'>
+      <div class='modal-header'>
+        <button type='button' class='close' data-dismiss='modal'>
+          <span aria-hidden='true'>&times;</span>
+          <span class='sr-only'>Close</span>
+        </button>
+        <h3>Sign up</h3>
+        <p>No obligations, commitments, or hidden fees.</p>
+      </div>
+      <div class='modal-body signupModal' id='signupModal'>
+        <div class='alert alert-info Hidden' id='signupReason'><!-- Rendered somewhere else, if needed --></div>
+        <div id='fanSignup'>
+          <div class="alert alert-danger Hidden Alerts" role="alert"></div>
+          <%= form_for User.new, method: :post do |u| %>
+            <div class='form-group'>
+              <label>
+                <span>First Name</span>
+                <%= u.text_field :fname, class: 'form-control', placeholder: 'First Name' %>
+              </label>
+              <label>
+                <span>Last Name</span>
+                <%= u.text_field :lname, class: 'form-control', placeholder: 'Last Name' %>
+              </label>
+              <label>
+                <span>Description</span>
+                <%= u.text_area :bio, class: 'form-control', placeholder: 'Description' %>
+              </label>
+              <label>
+                <span>Email</span>
+                <%= u.email_field :email, class: 'form-control', placeholder: 'Email' %>
+              </label>
+              <label>
+                <span>Password</span>
+                <%= u.password_field :password, class: 'form-control', placeholder: 'Password' %>
+              </label>
+              <label>
+                <span>Profile Picture</span>
+                <%= u.file_field :propic %>
+              </label>
+            </div>
+            <%= u.submit 'Sign Up', class: 'btn btn-primary form-control', id: 'signUp' %>
+          <% end %>
+      </div>
+    </div>
+  </div>
+</div>

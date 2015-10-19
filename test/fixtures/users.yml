@@ -9,6 +9,7 @@
 #  bio              :string
 #  email            :string
 #  password_digest  :string
+#  propic_url       :string
 #  num_endorsements :integer
 #  num_posts        :integer
 #  created_at       :datetime         not null

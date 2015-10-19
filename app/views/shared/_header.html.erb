@@ -1,0 +1,27 @@
+<% ias = is_active_session %>
+<% character = active_session_user %>
+<nav id='nav' role='navigation' class='Dark'>
+  <div class='container'>
+    <div class='row'>
+      <a class='pull-left' id='brandLink' href='/'>Real<span id='nameHighlight'>News</span></a>
+      <div class='pull-right'>
+        <% if character.blank? %>
+          <button type='button' class='btn btn-primary btn-outline navbar-btn', id='loginButton', data-toggle='modal', data-target='#login' data-ref='Header login'>Log in</button>
+          <button type='button' class='btn btn-primary btn-outline navbar-btn', id='signupButton', data-toggle='modal', data-target='#signup' data-ref='Header signup'>Sign up</button>
+        <% else %>
+          <div class='btn-group'>
+            <a class='btn btn-primary btn-outline navbar-btn' id='profileLink' href='<%= user_path character %>'><%= image_tag character.propic_url, size: '18x18' %> <%= character.full_name %></a>
+            <a class='btn btn-primary btn-outline navbar-btn', id='postButton', data-toggle='modal', data-target='#post_create' data-ref='Post Create'><span class='fa fa-pencil-square-o'></span></a>
+          </div>
+          <%= link_to "Log out", '/logout', :id => "logoutButton", :class => "btn btn-primary btn-outline navbar-btn"  %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</nav>
+<% if character.blank? %>
+  <%= render 'shared/login' %>
+  <%= render 'shared/signup' %>
+<% else %>
+  <%= render 'shared/new_post' %>
+<% end %>

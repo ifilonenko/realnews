@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+  resources :endorses
+  resources :likes
+  resources :posts
+  resources :sessions
+  resources :users
+  root 'posts#global'
+  get 'posts/:id' => 'posts#package'
+  get 'users/:id' => 'users#profile'
+  get 'logout' => 'sessions#destroy'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

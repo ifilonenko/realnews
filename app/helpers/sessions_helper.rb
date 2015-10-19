@@ -31,7 +31,7 @@ module SessionsHelper
     cookies.permanent[:pyw_session_code] = session.code
   end
 
-  def save_session_for_client(client)
+  def save_session_for_user(user)
     s = Session.new(ip_address: request.remote_ip)
     s.user = user
     s.save_with_session_code

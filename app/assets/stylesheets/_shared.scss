@@ -1,0 +1,358 @@
+@import url('//fonts.googleapis.com/css?family=Lato:100,300,400,700');
+@import 'compass';
+$Zonda: 'Zonda';
+/***** Zonda icon font *****/
+@font-face {
+  font-family: 'Zonda';
+  src: font-url('zonda.eot');
+  src: font-url('zonda.eot?#iefix') format('embedded-opentype'),
+  font-url('zonda.woff') format('woff'),
+  font-url('zonda.ttf') format('truetype'),
+  font-url('zonda.svg#zonda') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+  @media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+  font-family: 'zonda';
+  src: url('../font/zonda.svg?12993124#zonda') format('svg');
+  }
+  }
+  */
+
+[class^="icon-"]:before, [class*=" icon-"]:before {
+  font-family: "zonda";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+  
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+  
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+  
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+  
+/* you can be more comfortable with increased icons size */
+/* font-size: 120%; */
+  
+/* Uncomment for 3D effect */
+/* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+
+// $orange: rgb(241, 98, 20);
+$orange: #F16214;
+$purple: #3F2945;
+$blue: #0F81C0;
+$green: #52AF52;
+$red: #C22A27;
+
+// Width breakpoints
+$xxs: 'min-width: 320px';
+$media-xxs: 'only screen and (min-width: 320px)';
+$xs: 'min-width: 480px';
+$media-xs: 'only screen and (min-width: 480px)';
+$sm: 'min-width: 768px';
+$media-sm: 'only screen and (min-width: 768px)';
+$md: 'min-width: 992px';
+$media-md: 'only screen and (min-width: 992px)';
+$lg: 'min-width: 1200px';
+$media-lg: 'only screen and (min-width: 1200px)';
+
+* {
+  font-family: 'Lato', sans-serif !important;
+}
+a {
+  color: $green;
+
+  &:hover {
+    // color: #0F81C0 !important;
+    color: $green;
+    text-decoration: none !important; 
+  }
+}
+
+body {
+  background: white;
+}
+.btn {
+  font-weight: 700 !important;
+}
+
+.fa {
+  font-family: 'FontAwesome' !important;
+}
+
+.Hidden {
+  display: none;
+}
+
+.Icon {
+  font-family: $Zonda !important;   
+}
+
+@mixin background-image-retina($file, $type, $width, $height) {
+  background-image: image-url($file + '.' + $type);
+ 
+  @media (-webkit-min-device-pixel-ratio: 2), (-moz-min-device-pixel-ratio: 2), (-o-min-device-pixel-ratio: 2/1), (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+    & {
+    background-image: url($file + '@2x.' + $type);
+    -webkit-background-size: $width $height;
+    -moz-background-size: $width $height;
+    -o-background-size: $width $height;
+    background-size: $width $height;
+    }
+  }
+}
+
+@mixin vendor-prefix($name, $argument) {
+  #{$name}: #{ $argument };
+  -webkit-#{$name}: #{ $argument };
+  -ms-#{$name}: #{ $argument };
+  -moz-#{$name}: #{ $argument };
+  -o-#{$name}: #{ $argument };
+}
+
+// Requires width and height to be set on container
+.AbsoluteCenter {
+  margin: auto;
+  position: absolute !important;
+  top: 0; left: 0; bottom: 0; right: 0;
+}
+
+canvas.BkgBlur {
+  bottom: 0;
+  left: 0;
+  max-width: 100%;
+  min-height: 100%;
+  min-width: 100%;
+  opacity: 0.2;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.HeaderAlert {
+  font-size: 1.75em;
+  text-align: center;
+  font-weight: 600;
+  z-index: 2;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+@media( max-width: 400px){
+  .HeaderAlert {
+    width: 80%;
+  }
+}
+
+
+
+.btn-outline {
+  background-color: transparent !important;
+  outline: none !important;
+  @include vendor-prefix(transition, background-color 0.25s);
+  &:hover {
+    color: white !important;
+    &.btn-primary {
+      background: $green !important;
+    }
+  }
+}
+
+.btn-white {
+  color: white !important;
+}
+
+.EditingToggle {
+  clear: both;
+}
+
+.form-control {
+  border: 1px solid #CCCCCC;
+  &:focus {
+    border-color: transparentize($green, 0.4);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.035), 0 0 6px transparentize($green, 0.4);
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.035), 0 0 6px transparentize($green, 0.4);
+  }
+}
+
+
+.modal {
+  .modal-content {
+    overflow: hidden;
+  }
+  .modal-sm {
+    width: 320px;
+  }
+  .modal-md {
+    width: 420px;
+  }
+}
+.modal-header {
+  background: white;
+  h3, h4 {
+    font-weight: 700;
+  }
+  p {
+    font-size: 0.8em;
+    font-weight: 300;
+    margin-bottom: 0.5em;
+  }
+}
+.modal-footer {
+  background: white;
+}
+
+#nav {
+  box-shadow: 0px 6px 5px rgba(0,0,0,0.2);
+  background: rgba(255, 255, 255, 0.91);
+  margin-bottom: 0;
+  font-size: 1rem;
+  font-weight: 4300;
+  padding: 2em 0;
+  z-index: 100;
+  #brandLink {
+    display: inline-block;
+    font-size: 3em;
+    line-height: 1.5em;
+    color: $green;
+    #nameHighlight {
+      color: black !important;
+    }
+  }
+  .btn {
+    display: inline-block;
+    color: $green;
+    margin-left: 0.5em;
+  }
+  .btn-primary {
+    border-color: $green;
+  }
+  .btn-group {
+    .btn {
+      margin-left: 0;
+      &:first-child {
+        margin-left: 0.5em;
+      }
+    }
+  }
+}
+
+.ProfileCard {
+  box-sizing: border-box;
+  display: inline-block;
+  padding: 1em;
+  width: 24%;
+  .ProfileCardContent {
+    border-radius: 0.4em;
+    box-shadow: 0 1px 3px 1px transparentize(black, 0.9);
+    overflow: hidden;
+    &.Blank {
+      height: 342px;
+      position: relative;
+      .BlankLabel {
+        height: 1em;
+        text-align: center;
+        width: 100px;
+      }
+    }
+  }
+  .ProfileCardBackgroundImage {
+    background-size: cover;
+    height: 200px;
+    width: 100%;
+  }
+  .ProfileCardBody {
+    background: white;
+    border: 0.5px solid #D6D6D6;
+  }
+  .ProfileCardProfileImage {
+    background-size: cover;
+    border-radius: 34px;
+    display: inline-block;
+    float: left;
+    height: 68px;
+    margin: 0 1.2em;
+    width: 68px;
+  }
+  .ProfileCardDescription {
+    margin: 1.2em 0;
+    overflow: hidden;
+    width: auto;
+    .ProfileCardName {
+      color: #555;
+      font-size: 1.4em;
+      font-weight: 700;
+      margin: 0 auto 0.35em auto;
+    }
+    > p {
+      color: #777;
+      font-weight: 300;
+      margin: 0.12em auto;
+    }
+  }
+  .ProfileCardCountInfo {
+    background: #EBEBEB;
+    border-top: 0.5px solid #CCC;
+    box-shadow: inset 0 1px 2px 1px transparentize(black, 0.95);
+    overflow: hidden;
+    position: relative;
+  }
+}
+
+#resetPasswordLink {
+  float: right;
+}
+
+#loginFromSignupPrompt, #signupFromLoginPrompt {
+  font-size: 0.9em;
+  font-weight: 300;
+  margin-top: 0.5em;
+}
+
+#signup, #login, #passwordReset {
+  color: #333;
+  font-size: 16px;
+  .modal-body {
+    padding: 15px;
+    p {
+      font-size: 0.8em;
+    }
+  }
+}
+#signup {
+  #user_fname, #user_lname {
+    display: inline-block;
+    width: 142px;
+  }
+}
+#login {
+  #resetPassword {
+    font-size: 0.8em;
+    font-weight: 700;
+  }
+}
+
+
+

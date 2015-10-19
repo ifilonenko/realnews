@@ -13,8 +13,9 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
+gem 'bootstrap-sass', '~> 3.3.5'
 # gem 'therubyracer', platforms: :ruby
-
+gem "compass-rails", github: "Compass/compass-rails", branch: "master"
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -28,8 +29,11 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bcrypt', '~> 3.1.7'
 
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
+gem 'paperclip-ffmpeg', '~> 1.0.0'
 gem 'aws-sdk'
-
+# Setting up reactjs
+gem 'react-rails'
+gem 'font-awesome-rails'
 gem 'passenger', '~> 5.0.15'
 
 # Use Unicorn as the app server
@@ -39,6 +43,8 @@ gem 'passenger', '~> 5.0.15'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
+  gem 'guard-livereload', require: false
+  gem 'guard-rspec'
   gem 'annotate'
   gem 'figaro'
 

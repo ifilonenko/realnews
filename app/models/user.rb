@@ -9,6 +9,7 @@
 #  bio              :string
 #  email            :string
 #  password_digest  :string
+#  propic_url       :string
 #  num_endorsements :integer
 #  num_posts        :integer
 #  created_at       :datetime         not null
@@ -17,6 +18,7 @@
 
 class User < ActiveRecord::Base
   include UsersHelper
+  has_one :propic, class_name: 'Image', as: :imageable
   has_many :sessions
   has_many :likes
   has_many :endorsers
@@ -34,6 +36,7 @@ class User < ActiveRecord::Base
     self.num_posts = 0
     self.num_endorsements = 0
     self.full_name = !self.lname.blank? ? self.fname + " " + self.lname : self.fname
+    self.propic_url = "http://orig09.deviantart.net/b3b4/f/2013/116/b/0/spock_facebook_default_pic_by_nocturnalmarauder-d634b2y.jpg"
   end
 
   # Endorsers a user

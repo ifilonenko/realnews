@@ -7,6 +7,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :bio
       t.string :email
       t.string :password_digest
+      t.string :propic_url
       t.integer :num_endorsements
       t.integer :num_posts
       t.timestamps null: false
