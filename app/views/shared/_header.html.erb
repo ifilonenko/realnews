@@ -10,7 +10,8 @@
           <button type='button' class='btn btn-primary btn-outline navbar-btn', id='signupButton', data-toggle='modal', data-target='#signup' data-ref='Header signup'>Sign up</button>
         <% else %>
           <div class='btn-group'>
-            <a class='btn btn-primary btn-outline navbar-btn' id='profileLink' href='<%= user_path character %>'><%= image_tag character.propic_url, size: '18x18' %> <%= character.full_name %></a>
+            <a class='btn btn-primary btn-outline navbar-btn' id='profileLink' href='<%= user_path character %>'><%= image_tag character.propic_url, size: '18x18', style: "border: 1px solid black;
+    border-radius: 50%;" %> <%= character.full_name %></a>
             <a class='btn btn-primary btn-outline navbar-btn', id='postButton', data-toggle='modal', data-target='#post_create' data-ref='Post Create'><span class='fa fa-pencil-square-o'></span></a>
           </div>
           <%= link_to "Log out", '/logout', :id => "logoutButton", :class => "btn btn-primary btn-outline navbar-btn"  %>

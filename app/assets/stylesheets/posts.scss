@@ -3,3 +3,31 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import "shared";
 @import 'compass';
+#signup {
+  .signupModal{
+    .bioArea{
+      width: 20.5em !important;
+      height: 5em !important;
+    }
+    .btn-primary {
+      background-color: $green !important;
+      border-color: $green !important;
+    }
+  }
+}
+#login{
+  #loginModal{
+    .btn-primary {
+      background-color: $green !important;
+      border-color: $green !important;
+    }
+  }
+}
+#post_create{
+  #postModal{
+    .btn-primary {
+      background-color: $green !important;
+      border-color: $green !important;
+    }
+  }
+}

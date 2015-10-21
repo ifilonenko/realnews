@@ -6,29 +6,31 @@
           <span aria-hidden='true'>&times;</span>
           <span class='sr-only'>Close</span>
         </button>
-        <h3>Create a Package</h3>
-        <p>Customize your package with a tag photo, description, and video</p>
+        <h3>Quick draft of a package</h3>
+        <p>Customize your package with text, photo, and video</p>
       </div>
-      <div class='modal-body signupModal' id='signupModal'>
-        <div class='alert alert-info Hidden' id='signupReason'><!-- Rendered somewhere else, if needed --></div>
-        <div id='fanSignup'>
+      <div class='modal-body postModal' id='postModal'>
+        <div id='postCreate'>
           <div class="alert alert-danger Hidden Alerts" role="alert"></div>
-          <%= form_for Post.new, method: :post do |u| %>
+          <%= form_for Post.new do |u| %>
             <div class='form-group'>
-              <label>
-                <span>Description</span>
+                <%= u.label 'Textual Content' %>
                 <%= u.text_area :description, class: 'form-control', placeholder: 'Package' %>
               </label>
+            </div>
+            <div class='form-group'>
               <label>
-                <span>Package Photo</span>
+                <%= u.label 'Package Photo' %>
                 <%= u.file_field :tagphoto %>
               </label>
+            </div>
+            <div class='form-group'>
               <label>
-                <span>Link to video package</span>
-                <%= u.text_field :player_embed, class: 'form-control', placeholder: 'http://youtube.com/your_link_here' %>
+                <%= u.label 'Package Video' %>
+                <%= u.text_field :player_embed, class: 'form-control', placeholder: 'your_link_here.com' %>
               </label>
             </div>
-            <%= u.submit 'Create', class: 'btn btn-primary form-control', id: 'postCreate' %>
+            <%= u.submit 'Create Draft', class: 'btn btn-primary', id: 'postCreate' %>
           <% end %>
       </div>
     </div>

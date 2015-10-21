@@ -7,22 +7,14 @@
           <span class='sr-only'>Close</span>
         </button>
         <h3>Log in</h3>
+        <p>Access your account and keep producing content.</p>
       </div>
       <div class='modal-body'>
-        <div class='alert alert-info Hidden' id='loginReason'><!-- Rendered somewhere else, if needed --></div>
+        <div class='alert alert-info Hidden' id='loginReason'></div>
         <div id='homeContainer'>
-          <div id='bg'></div>
-          <div id="fb-root"></div>
-          <div class='ArtistLogin' id='artistLogin'>
-
-            <div class="alert alert-danger Hidden Alerts">
-              <!--  rendered using react (via signup.js) -->
-            </div>
-            <div id="formSuccess" class="alert alert-success Hidden">
-              <!-- rendered using react (via signup.js) -->
-            </div> 
+          <div class='UserLogin' id='userLogin'>
             <div id='login_alerts'></div>           
-            <%= form_for(User.new, method: :post, url: sessions_path, html: { id: 'loginForm' }) do |f| %>
+            <%= form_for(User.new, method: :post, url: sessions_path, html: { id: 'user_login' }) do |f| %>
               <div class='form-group'>
                 <%= f.label 'Email' %>
                 <%= f.email_field :email, class: 'form-control', placeholder: "Email", required: true  %>
@@ -31,7 +23,7 @@
                 <%= f.label 'Password' %>
                 <%= f.password_field :password, class: 'form-control', placeholder: "Password", required: true%>
               </div>
-              <%= button_tag "Log in", class: "btn btn-large btn-primary", id: "loginButtonModal" %>
+              <%= button_tag "Log in", class: "btn btn-primary", id: "loginButtonModal" %>
             <% end %>
           </div>
         </div>

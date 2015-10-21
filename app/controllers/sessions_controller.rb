@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
     end
     respond_to do |format|
       format.html { redirect_to root_path }
-      format.json { render json: { success: success, alerts: alerts } } 
+      format.json { render json: { success: success, alerts: alerts, route: '/' } } 
     end
   end
   def update
